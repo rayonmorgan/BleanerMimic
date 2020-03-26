@@ -1,0 +1,17 @@
+﻿@model WeatherModel
+
+
+<div class="clear-fix weather-date"> 
+    <span class="vertical-line"> @Model.weatherServices.daysWeek </span>
+   <span>  @Model.weatherServices.month </span>
+   <span> @Model.weatherServices.day, </span>
+   <span> @Model.weatherServices.year </span>
+</div>
+
+<ul class="weather-style">
+    <li> <span class="city"> <a href="#" >@Model.weatherServices.city </a> </span> </li> 
+    <li class="weather-icon">@Html.weatherIcon(Model.weatherServices.dayType) </li>
+    <li> <span class="fahrenheit"> @Model.weatherServices.temperatureFahrenheit &#x2109</span> </li>
+    <li> <span class="degree"> @Model.weatherServices.temperatureDegree &#x2103</span> </li>
+</ul>
+

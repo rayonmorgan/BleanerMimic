@@ -1,0 +1,44 @@
+﻿@model GleanerMimic.WebUi.Models.ArticleModel
+
+<div>
+    <h4>@ViewBag.edit_create</h4>
+   
+    @using(Html.BeginForm("create","administration",FormMethod.Post))
+    {
+        <div class="table-responsive admin-div-body">
+            <table class="table">
+               <tr>
+                    <td>@Html.HiddenFor(x=>x.singleArticle.itemId)</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ValidationSummary(null, new { @class = "alert-danger" })
+                    </td>
+                </tr>
+                 
+                <tr>
+                    <th>Article Type</th>                   
+                </tr>
+                <tr> 
+                    <td>                      
+                       @Html.DropDownListFor(lis=>lis.singleArticle.articleType,Model.articleType)
+                    </td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(y => y.singleArticle.headerText): </th>
+                </tr>
+                <tr>                    
+                    <td>@Html.TextBoxFor(y => y.singleArticle.headerText, new { @class = "form-control" })</td>
+                </tr>
+                 <tr>
+                    <th>@Html.LabelFor(y => y.singleArticle.bodyText)</th>                    
+                </tr>
+                <tr>                   
+                    <td>@Html.TextAreaFor(y => y.singleArticle.bodyText, new { @class = "form-control body-textarea" })</td>
+                </tr>        
+            </table>
+            <span><input type="submit" id="submit" value="Submit" /> </span>
+        </div>
+    }
+
+</div>

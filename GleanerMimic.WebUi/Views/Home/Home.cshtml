@@ -1,0 +1,203 @@
+﻿@model ArticleModel
+@{
+    ViewBag.Title = "Home";
+}
+
+<div class="panel-body">
+    <div class="row">
+    @if (Model.article.Count() >= 1)
+    {
+        <div class="col-md-8">  
+            @{
+                //string[] news_Sections = new string[] { "Latest News", "Lead Stories", "News", "Sports", "Business", "Entertainment", "Commentary", "Letters", "World News", "Social", "Flair" };
+
+                //extract distinctive article types so to create article body for available areas:
+                //{ "Latest News", "Lead Stories", "News", "Sports", "Business", "Entertainment", "Commentary", "Letters", "World News", "Social", "Flair" };
+                var available_sections = Model.article
+                                        .GroupBy(x => x.articleType)
+                                        .Select(x => x.First());
+
+
+
+                var time_Since_Submit_temp = @DateTime.Now.Minute;// -@item.submitTime.Minute + 2;
+                var timeSinceSubmit = time_Since_Submit_temp.ToString() + " Minutes Ago";
+
+                var counter = 0;
+             } 
+             @foreach (var sections in available_sections)
+             {                                         
+                <div class="row box-outline">
+                    <div class="col-md-6" > 
+                        <span class="standout-header"><a href="#">@sections.articleType </a></span> <br /> 
+                        @{  if (counter < Model.article.Count())
+                            {
+                                if (Model.article.ElementAt(counter).articleType == sections.articleType)
+                                {                                        
+                                    <img src="@Model.article.ElementAt(counter).imageFolder/@Model.article.ElementAt(counter).imageName" alt="img" class="img-responsive" />                                    
+                                    <h4>@Html.ActionLink(@Model.article.ElementAt(counter).headerText, "Details", "viewArticle", new { id = @Model.article.ElementAt(counter).itemId }, null)</h4>
+                                    <p> 
+                                        @{
+                                    var test = Model.article.ElementAt(counter).bodyText;
+                                    var increment = 213;
+                                    if (test != null)
+                                    {
+                                        if (test.Count() > (increment - 1))
+                                        {
+                                            while (true)
+                                            {
+                                                if (test.ElementAt(increment) == ' ')
+                                                {
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    increment++;
+                                                }
+                                            }
+                                             
+                                                     @test.Substring(0, increment)
+                                        }
+                                        else
+                                        {
+                                                     @test.Substring(0, test.Count() / 2);
+                                        }
+                                    }                             
+                                         
+                                          }...                                   
+                                    </p> 
+                                
+                                }
+                                else
+                                {
+
+                                }
+                            }
+                        }
+                    
+                    </div>
+                    
+                    <div class="col-md-6">                   
+                        <div class="article-snippet-top-section"> <!--Top section -->                    
+
+                            @{ if ((counter + 1) < Model.article.Count())
+                               {
+                                      
+                                   
+                                   if (Model.article.ElementAt(counter + 1).articleType == sections.articleType)
+                                   {
+                                       if ((DateTime.Now - @Model.article.ElementAt(counter + 1).submitTime.Value.Date).Days < 1)
+                                       {
+                                           time_Since_Submit_temp = (DateTime.Now - @Model.article.ElementAt(counter + 1).submitTime.Value).Hours;
+                                           if (time_Since_Submit_temp >= 1)
+                                           {
+                                               timeSinceSubmit = (@Model.article.ElementAt(counter + 1).submitTime.Value).ToString("h:mm tt");
+                                           }
+                                           else
+                                           {
+                                               time_Since_Submit_temp = (DateTime.Now - @Model.article.ElementAt(counter + 1).submitTime.Value).Minutes;
+                                               timeSinceSubmit = time_Since_Submit_temp.ToString() + " Minutes Ago";
+                                           }
+                                       }
+                                       else
+                                       {
+                                           timeSinceSubmit = (@Model.article.ElementAt(counter + 1).submitTime.Value).ToShortDateString();
+                                       }
+                                                         
+                                        
+                                        <h4>@Html.ActionLink(@Model.article.ElementAt(counter + 1).headerText, "Details", "viewArticle", new { id = @Model.article.ElementAt(counter + 1).itemId }, null)</h4>
+                                        
+                                        <p> 
+                                           @{
+                                               var test2 =  Model.article.ElementAt(counter + 1).bodyText;
+                                                var increment2 = 213;
+
+                                                if (test2 != null)
+                                                { 
+                                                    if (test2.Count() > (increment2 - 1))
+                                                   {
+                                                       while (true)
+                                                       {
+                                                           if (test2.ElementAt(increment2) == ' ')
+                                                           {
+                                                               break;
+                                                           }
+                                                           else
+                                                           {
+                                                               increment2++;
+                                                           }
+                                                       }
+                                             
+                                                             @test2.Substring(0, increment2)
+                                                   }
+                                                    else
+                                                    {
+                                                             @test2.Substring(0, test2.Count() / 2);
+                                                    }
+                                                }
+                                                                        
+                                            }
+                                         
+                                        ... <span class="time-since-submit">@timeSinceSubmit </span>                                   
+                                     </p>  
+
+                                             
+                                        
+
+                                       
+                                   }
+                               }                                                                   
+                            }
+                        </div>
+                        <div class="bottom-item-list"> <!--Bottom section -->
+                            <ul style="background-color:inherit;">                              
+                                @{counter++;}
+                                @foreach (var items in Model.article.Skip(counter + 1))
+                                {
+                                    counter++;
+                                    if (items.articleType.ToLower() == sections.articleType.ToLower())
+                                    {
+                                        if ((DateTime.Now - items.submitTime.Value.Date).Days < 1)
+                                        {
+                                            time_Since_Submit_temp = (DateTime.Now - items.submitTime.Value).Hours;
+                                            if (time_Since_Submit_temp >= 1)
+                                            {
+                                                timeSinceSubmit = (items.submitTime.Value).ToString("h:mm tt");
+                                            }
+                                            else
+                                            {
+                                                time_Since_Submit_temp = (DateTime.Now - items.submitTime.Value).Minutes;
+                                                timeSinceSubmit = time_Since_Submit_temp.ToString() + " Minutes Ago";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            timeSinceSubmit = (items.submitTime.Value).ToShortDateString();
+                                        }
+                                        <li> 
+                                           <span class="k">
+                                            <a href="#"></a> 
+                                            @Html.ActionLink(@items.headerText, "Details", "viewArticle", new { id = @items.itemId }, null)
+                                            <span class="time-since-submit">@timeSinceSubmit </span> </span>                                        
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
+                                } 
+                                                                
+                            </ul>                            
+                        </div>                 
+                    </div>            
+                </div>
+             }           
+ <!-- ---------------------------- -->      
+        </div>
+    }
+      
+        <div class="col-md-4 ad-right">
+            <!-- right column -->
+            @Html.Action("Mainads", "Ads")
+        </div>
+    </div>
+</div>

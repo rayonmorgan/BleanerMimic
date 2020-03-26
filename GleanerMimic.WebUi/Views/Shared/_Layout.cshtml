@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Custom.css" rel="stylesheet" type="text/css" />   
+    
+    <script src="../../Scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="container top-bottom-margin" > <!-- Main Container -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default body-blur"> <!-- Main Header Container -->
+                    <div class =" panel-body"> <!-- Tools widget Container --> 
+                         <div class="row">
+                            <div id="top-section-left" class="col-md-4 navbar navbar-default overide-nav-nav-default">
+                                <div class="container-fluid"> <!--Left Apps selection -->
+                                    @Html.topAppsMenu()
+                                </div>                                
+                            </div> 
+                            <div id="top-section-centre" class="col-md-5">
+                                @Html.Action("ShowWeather", "WeatherService")  <!-- centre date and weather area -->
+                            </div> 
+                            <div id="top-section-right" class="col-md-3">                               
+                                <script>
+                                    (function () {
+                                        var cx = '013808937833054467892:ra3ljqby43w';
+                                        var gcse = document.createElement('script');
+                                        gcse.type = 'text/javascript';
+                                        gcse.async = true;
+                                        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                                         '//cse.google.com/cse.js?cx=' + cx;
+                                        var s = document.getElementsByTagName('script')[0];
+                                        s.parentNode.insertBefore(gcse, s);
+                                    })();
+                                </script>
+                                <gcse:searchbox-only></gcse:searchbox-only>
+                            </div>  
+                        </div>          
+                    </div> 
+
+                    <div class =" panel-body"> <!-- Logo Container --> 
+                        <div class="row">
+                            <div id="logo-left" class="col-md-3">
+                            </div> 
+                            <div id="logo-centre" class="col-md-6">
+                               <a href="#"> 
+                                   <img src="~/images/logo.jpg" alt="The Gleaner Jamaica" class="img-responsive" />  
+                               </a>
+                            </div> 
+                            <div id="log-right" class="col-md-3"></div>  
+                        </div>     
+                    </div>
+
+                
+                    <nav class="navbar navbar-default navbar-background-color">
+                        <div class="container-fluid"> <!-- Menu outer wrapper -->
+
+                            <div class="navbar-header">                                  
+                                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">                                    
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                  </button>     
+                              </div>
+
+                            <div class="collapse navbar-collapse"  id="myNavbar"> <!--Menu Main Container -->                                  
+                                @Html.TopMenu()          
+                            </div> 
+                        </div>  
+                    </nav> 
+                    <section class="navbar navbar-default section-menu">
+                        <div class="container-fluid"> <!-- Menu outer wrapper -->
+                               <div class="navbar-header">
+                                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar2">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                  </button>     
+                              </div>
+                            <div class="collapse navbar-collapse" id="myNavbar2">  <!--Menu Secondary Container -->  
+                                @Html.SecondaryMenu()                                    
+                            </div> 
+                        </div>  
+                    </section> 
+                    
+                </div>                  
+                <div class="third-level-align body-blur"> <!--Body Container -->
+                   <div> <!-- third level globla area --> 
+                     @Html.Action("ThirdMenu","ThirdLevelMenu")
+                   </div>
+                   <div class="in-news all-blur ">
+                     @Html.Action("showHeadlines", "InTheNews")
+                   </div>
+                    @RenderBody() 
+                    @RenderSection("scripts", required: false) 
+                           
+                </div>
+            </div>
+            
+            <div class="col-md-12""> <!-- footer -->
+                <div class="footer-container body-blur">
+                    <div class="footer-column">                         
+                        <ul>
+                            <li> <span class="footer-coloumn-header">The Bleaner Archives </span></li>
+                            <li> <a href="#">Digital Archives: Online editions 2006-Now</a> </li>
+                            <li> <a href="#">Library: Research and Assistance</a> </li>
+                            <li> <a href="#">Print Archives: Editions 1835-Present</a> </li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">                         
+                        <ul>
+                            <li><span class="footer-coloumn-header">Bleaner Your Way</span></li>
+                            <li> <a href="#">Mobile: Get the Bleaner on your mobile</a> </li>
+                            <li> <a href="#">Newsletter: Get headline news</a> </li>
+                            <li> <a href="#">RSS Feeds </a> </li>
+                            <li> <a href="#">Gbeat</a> </li>
+                            <li> <a href="#">My Report</a> </li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">                         
+                         <ul>
+                            <li><span class="footer-coloumn-header">Bleaner Company Websites</span></li>
+                            <li> <a href="#">The Star</a> </li>
+                            <li> <a href="#">Bleaner Classifieds</a> </li>
+                            <li> <a href="#">Go Jamaica</a> </li>
+                            <li> <a href="#">Hospitality Jamaica</a> </li>
+                            <li> <a href="#">Bleaner Extra (N. America)</a> </li>
+                            <li> <a href="#">Youthlink</a> </li>
+                            <li> <a href="#">Voice UK</a> </li>
+                        </ul>
+                    </div>
+                      <div class="footer-column">                        
+                        <ul>
+                            <li><span class="footer-coloumn-header">Bleaner Company Websites</span></li>
+                            <li> <a href="#">Business Directory</a> </li>
+                            <li> <a href="#">Restaurant Week</a> </li>
+                            <li> <a href="#">Discover Jamaica</a> </li>
+                            <li> <a href="#">Go Jamaica Hosting</a> </li>
+                            <li> <a href="#">First Look</a> </li>
+                            <li> <a href="#">Sports Jamaica</a> </li>
+                            <li> <a href="#">diGjamaica</a> </li>
+                            <li> <a href="#">Weather</a> </li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">                         
+                         <ul>
+                            <li><span class="footer-coloumn-header">Bleaner Links</span></li>
+                            <li> <a href="#">Our Products</a> </li>
+                            <li> <a href="#">Advertise with us</a> </li>
+                            <li> <a href="#">About Us</a> </li>
+                            <li> <a href="#">Contact Us</a> </li>
+                            <li> <a href="#">Suggestion</a> </li>
+                            <li> <a href="#">Subscription</a> </li>
+                            <li> <a href="#">Terms and Conditions</a> </li>
+                            <li> <a href="#">Submit a Letter</a> </li>
+                            <li> <a href="#">Privacy Policy</a> </li>
+                            <li> <a href="#">RJR Bleaner Merger Q&A</a> </li>
+                        </ul>
+                    </div>
+                     <div class ="clear-float-footer text-center">               
+                        <p>Copyright &copy; 2015 The Bleaner Company (Media) Limited. All Rights Reserved.</p>
+                     </div>
+                </div>               
+            </div>
+             
+        </div>    
+    </div>  
+</body>
+</html>

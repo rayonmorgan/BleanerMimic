@@ -1,0 +1,57 @@
+﻿@model IEnumerable<GleanerMimic.Domain.Entities.Article>
+@{
+    Layout = "";
+}
+
+ 
+<table class="table table-bordered table-hover">
+    <tr>        
+        <th>
+            @Html.DisplayNameFor(model => model.headerText)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.articleType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.submitTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.submittedBy)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var itemId in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => itemId.headerText)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => itemId.articleType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => itemId.submitTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => itemId.submittedBy)
+        </td>
+         
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = itemId.itemId }) |
+            @Html.ActionLink("Details", "Details", "viewArticle", new { id = itemId.itemId }, null) |     
+                    
+            @using (Html.BeginForm("Delete", "Administration", FormMethod.Post))
+            {
+                @Html.HiddenFor(model => itemId, new { Value = itemId.itemId })
+                <input type="submit" value="Delete" class="btn btn-link" />
+            }
+            
+        </td>
+    </tr>
+}
+
+</table>

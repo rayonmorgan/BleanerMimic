@@ -1,0 +1,43 @@
+﻿@model GleanerMimic.Domain.Entities.MyUser
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@ViewBag.message
+
+<div class="login-form">
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new {@role="form" }))
+    {
+        @Html.ValidationSummary(false)
+
+        <fieldset>
+            <legend><h2>Login</h2></legend>
+
+            <div class="editor-label ">
+                @Html.LabelFor(model => model.myUserName)
+            </div>
+            <div class="editor-field ">
+                @Html.EditorFor(model => model.myUserName)
+                @Html.ValidationMessageFor(model => model.myUserName)
+            </div>
+
+            <div class="editor-label ">
+                @Html.LabelFor(model => model.myPassword)
+            </div>
+            <div class="editor-field ">
+                @Html.EditorFor(model => model.myPassword)
+                @Html.ValidationMessageFor(model => model.myPassword)
+            </div>
+            
+            <p>
+                <input type="submit" value="Login" />
+            </p>
+        </fieldset>
+    }
+</div>
+ 
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

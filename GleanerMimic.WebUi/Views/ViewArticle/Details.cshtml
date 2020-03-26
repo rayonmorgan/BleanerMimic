@@ -1,0 +1,33 @@
+﻿@model ArticleModel
+@{
+    ViewBag.Title = Model.singleArticle.headerText;
+}
+
+<div class="panel-body">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Left body -->
+            <h3>@Model.singleArticle.headerText</h3>
+            <div>
+                <span>Share this story: </span>
+            </div>
+            <div>
+                <div>
+                    <p>
+                        Published:
+                    </p>
+                    <p>
+                        <img src="../../@Model.singleArticle.imageFolder/@Model.singleArticle.imageName" alt="img" class="img-responsive"/></p>
+                </div>
+                <div>
+                    @Html.Raw(@Model.singleArticle.bodyText.ToString().Replace(Environment.NewLine,"<br />"))
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" style="background-color:green;">
+            <!-- right column -->
+            Right
+        </div>
+    </div>
+</div>
+ 
